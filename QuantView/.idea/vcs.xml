@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/CppPolygon" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/FIZYKA2019" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/FIZYKA2019/libraries/SFML/SFML" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/GAME/Didax" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/GAME/PETBWUAMF" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Graph-Coloring" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/NeuralViewer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/NoteWriter" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/TasksApp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jajsy/Jajsy" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jajsy/youtube_tutorial" vcs="Git" />
+  </component>
+</project>
