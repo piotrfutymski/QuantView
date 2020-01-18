@@ -20,11 +20,11 @@ class Complex
         b = B;
     }
 
-    public static Complex add(Complex A, Complex B) throws CloneNotSupportedException
+    public static Complex add(Complex A, Complex B)
     {
-        Complex res = (Complex) A.clone();
-        res.a += B.a;
-        res.b += B.b;
+        Complex res = new Complex();
+        res.a = A.a + B.a;
+        res.b = A.b + B.b;
         return res;
     }
 
