@@ -35,6 +35,23 @@ public class StateVector
         {
             data[i] = Complex.add(data[i], Complex.multiply(tDer[i], new Complex(deltaT)));
         }
+        this.normalize();
+    }
+
+    private void normalize()
+    {
+        double sum = 0;
+        var prob = this.getProbability();
+        for (int i = 0; i < probeNumber; i++) {
+            sum += prob[i];
+        }
+        sum/=probeNumber;
+        sum =Math.sqrt(sum);
+        for (int i = 0; i < probeNumber; i++)
+        {
+            data[i].a/=sum;
+            data[i].b/=sum;
+        }
     }
 
     private Complex[] countStateTDerivative(Potential potential)
@@ -51,8 +68,7 @@ public class StateVector
                 res[i] = Complex.add(Complex.multiply(new Complex(-2,0),data[probeNumber - 1]),data[probeNumber - 2]);
             else
                 res[i] = Complex.add(Complex.add(Complex.multiply(new Complex(-2,0),data[i]),data[i-1]), data[i+1]);
-            res[i] = Complex.multiply(res[i], new Complex(((double)1/(double)probeNumber)));
-            res[i] = Complex.multiply(res[i], new Complex(((double)1/(double)probeNumber)));
+            res[i] = Complex.multiply(res[i], new Complex(probeNumber*probeNumber));
             res[i] = Complex.add(res[i], Complex.multiply(data[i],new Complex(potential.data[i])));
             res[i] = Complex.multiply(res[i], new Complex(0 ,-1));
         }

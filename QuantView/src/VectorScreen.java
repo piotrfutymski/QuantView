@@ -28,7 +28,7 @@ public class VectorScreen extends Canvas
                 l++;
             }
             v/= l;
-            v = v*height/50;
+            v = v*height/10;
             res[p] = height - (int)v;
             if(res[p] < 0)
                 res[p] = 0;

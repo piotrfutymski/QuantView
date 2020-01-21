@@ -7,6 +7,9 @@ public class Potential
     public Potential()
     {
         data = new double[probeNumber];
+        for (int i = 350; i < 360; i++) {
+            data[i] = 100000;
+        }
     }
 
     public Potential(int n)

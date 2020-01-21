@@ -7,9 +7,6 @@ public class Main
     public static void main(String[] args) throws InterruptedException {
         Potential p = new Potential();
         StateVector s = new StateVector();
-        for (int i = 0; i < 10000; i++) {
-            s.countNextState(1000, p);
-        }
         VectorScreen m = new VectorScreen();
         m.loadVector(s);
         JFrame f=new JFrame("Button Example");
@@ -18,8 +15,12 @@ public class Main
         f.setVisible(true);
         while(true)
         {
-            TimeUnit.MICROSECONDS.sleep(100);
-
+	        for (int i = 0; i < 4000; i++)
+	        {
+                s.countNextState(0.00000001, p);
+        	}
+            m.repaint();
+            TimeUnit.MICROSECONDS.sleep(300);
         }
     }
 }
