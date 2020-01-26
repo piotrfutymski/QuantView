@@ -1,7 +1,7 @@
 import java.io.Serializable;
 
 public class StateVector implements Serializable {
-    private int probeNumber = 1200;
+    private int probeNumber = 600;
     public Complex[] data;
     private static double h= 1;
 

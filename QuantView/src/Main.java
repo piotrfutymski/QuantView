@@ -58,8 +58,8 @@ public class Main
         m.setBounds(0,0,600,480);
 
         final boolean[] end = {false};
-        JButton b=new JButton("End");
-        b.setBounds(100,490,70,30);
+        JButton b=new JButton("End and Save to File");
+        b.setBounds(100,490,300,30);
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
 
@@ -85,7 +85,7 @@ public class Main
         while(!end[0])
         {
 	        for (int i = 0; i < 10000; i++) {
-                s.countNextState(0.000000005, p);
+                s.countNextState(0.000000001, p);
             }
             m.repaint();
         }

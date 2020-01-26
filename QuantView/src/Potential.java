@@ -2,7 +2,7 @@ import java.io.Serializable;
 
 public class Potential implements Serializable
 {
-    private int probeNumber = 1200;
+    private int probeNumber = 600;
     public double[] data;
 
     public Potential()

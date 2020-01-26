@@ -17,20 +17,11 @@ public class VectorScreen extends Canvas
     private int[] getPointSPositions()
     {
         int []res = new int[width];
-        int i = 0;
         double [] prob = vector.getProbability();
         for (int p = 0; p < width; p++)
         {
-            double v = 0;
-            int l = 0;
-            while(i * width < p * vector.getProbeNumber())
-            {
-                v += prob[i];
-                i++;
-                l++;
-            }
-            v/= l;
-            v = v*height/40;
+            double v = prob[p];
+            v = v*height/30;
             res[p] = height - (int)v;
             if(res[p] < 0)
                 res[p] = 0;
@@ -41,18 +32,9 @@ public class VectorScreen extends Canvas
     private int[] getPointPPositions()
     {
         int []res = new int[width];
-        int i = 0;
         for (int p = 0; p < width; p++)
         {
-            double v = 0;
-            int l = 0;
-            while(i * width < p * potential.data.length)
-            {
-                v += potential.data[i];
-                i++;
-                l++;
-            }
-            v/= l;
+            double v = potential.data[p];
             v = v*height/4000000;
             res[p] = height - (int)v;
             if(res[p] < 0)
