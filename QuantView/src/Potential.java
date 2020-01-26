@@ -1,15 +1,13 @@
+import java.io.Serializable;
 
-public class Potential
+public class Potential implements Serializable
 {
-    private int probeNumber = 600;
+    private int probeNumber = 1200;
     public double[] data;
 
     public Potential()
     {
         data = new double[probeNumber];
-        for (int i = 350; i < 360; i++) {
-            data[i] = 100000;
-        }
     }
 
     public Potential(int n)

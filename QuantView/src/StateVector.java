@@ -1,7 +1,9 @@
-public class StateVector
-{
-    private int probeNumber = 600;
-    private Complex[] data;
+import java.io.Serializable;
+
+public class StateVector implements Serializable {
+    private int probeNumber = 1200;
+    public Complex[] data;
+    private static double h= 1;
 
 
     public int getProbeNumber()
@@ -9,23 +11,35 @@ public class StateVector
         return probeNumber;
     }
 
-    public StateVector()
+    public static StateVector createGausseFunction(double sigma, double p0)
+    {
+        StateVector res = new StateVector();
+        double normalizator = Math.pow(3.1412*sigma*sigma, 0.25);
+        for (int i = 0; i < res.probeNumber; i++)
+        {
+            double x = (double)i/(double)res.probeNumber - 0.5;
+            Complex y = Complex.expI(x*p0/h);
+            double a = Math.exp(-x*x/(2*sigma*sigma))/normalizator;
+            res.data[i] = Complex.multiply(y, new Complex(a));
+        }
+        return res;
+    }
+
+    private StateVector()
     {
         data = new Complex[probeNumber];
         for (int i = 0; i < probeNumber; i++) {
             data[i] = new Complex();
         }
-        data[probeNumber / 2].a = Math.sqrt(probeNumber);
     }
 
-    public StateVector(int n)
+    private StateVector(int n)
     {
         probeNumber = n;
         data = new Complex[probeNumber];
         for (int i = 0; i < probeNumber; i++) {
             data[i] = new Complex();
         }
-        data[probeNumber / 2].a = Math.sqrt(probeNumber);
     }
 
     public void countNextState(double deltaT, Potential potential)
@@ -35,7 +49,6 @@ public class StateVector
         {
             data[i] = Complex.add(data[i], Complex.multiply(tDer[i], new Complex(deltaT)));
         }
-        this.normalize();
     }
 
     private void normalize()
@@ -62,16 +75,18 @@ public class StateVector
         }
         for (int i = 0; i < probeNumber; i++)
         {
-            if(i == 0)
-                res[i] = Complex.add(Complex.multiply(new Complex(-2,0),data[0]),data[1]);
-            else if(i == probeNumber - 1)
-                res[i] = Complex.add(Complex.multiply(new Complex(-2,0),data[probeNumber - 1]),data[probeNumber - 2]);
-            else
-                res[i] = Complex.add(Complex.add(Complex.multiply(new Complex(-2,0),data[i]),data[i-1]), data[i+1]);
-            res[i] = Complex.multiply(res[i], new Complex(probeNumber*probeNumber));
-            res[i] = Complex.add(res[i], Complex.multiply(data[i],new Complex(potential.data[i])));
-            res[i] = Complex.multiply(res[i], new Complex(0 ,-1));
+            if(i == 0 || i == probeNumber - 1)
+                res[i] = new Complex(0);
+            else {
+                res[i] = Complex.add(Complex.add(Complex.multiply(new Complex(-2, 0), data[i]), data[i - 1]), data[i + 1]);
+                res[i] = Complex.multiply(res[i], new Complex(probeNumber * probeNumber*h*h));
+                res[i] = Complex.add(res[i], Complex.multiply(data[i], new Complex(potential.data[i])));
+                res[i] = Complex.multiply(res[i], new Complex(0, -1));
+                res[i] = Complex.multiply(res[i], new Complex(1/h));
+            }
         }
+        res[0] = res[1];
+        res[probeNumber-1] = res[probeNumber-2];
         return res;
     }
 

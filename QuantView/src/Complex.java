@@ -1,4 +1,6 @@
-class Complex
+import java.io.Serializable;
+
+class Complex implements Serializable
 {
     public double a;
     public double b;
@@ -50,6 +52,11 @@ class Complex
         res.a = A.a*B.a-A.b*B.b;
         res.b = A.a*B.b + A.b*B.a;
         return res;
+    }
+
+    public static Complex expI(double alfa)
+    {
+        return new Complex(Math.cos(alfa), Math.sin(alfa));
     }
 
     public double getNormSquared()
